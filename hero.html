@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>carlos0ff.dev — José Carlos</title>
+
+<!-- Fontes: Fraunces (título, com itálico no destaque) + JetBrains Mono (resto) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------------------------------------------------------------
+     Tokens: tudo em variáveis CSS. Tema escuro é o padrão; o claro
+     entra via prefers-color-scheme. Um único acento (terracota).
+  --------------------------------------------------------------- */
+  :root {
+    --bg: #14120f;          /* marrom-escuro quente */
+    --text: #ece6da;        /* off-white */
+    --muted: #a39a89;       /* texto secundário */
+    --accent: #e8794f;      /* terracota */
+    --line: rgba(236, 230, 218, 0.14); /* bordas discretas */
+    --chip-bg: rgba(236, 230, 218, 0.05);
+
+    --font-title: "Fraunces", Georgia, serif;
+    --font-body: "JetBrains Mono", ui-monospace, monospace;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f5f0e6;        /* bege */
+      --text: #2a241c;
+      --muted: #6f6454;
+      --accent: #bf4a1c;
+      --line: rgba(42, 36, 28, 0.14);
+      --chip-bg: rgba(42, 36, 28, 0.04);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    /* tipografia fluida base */
+    font-size: clamp(15px, 1.4vw, 17px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Foco visível e acessível em qualquer elemento interativo */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------------------------------------------------------------
+     Navbar simples
+  --------------------------------------------------------------- */
+  .wrap {
+    width: min(1180px, 100% - 3rem);
+    margin-inline: auto;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1.5rem;
+    gap: 1rem;
+  }
+
+  .nav__logo {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  .nav__logo span { color: var(--accent); }
+
+  .nav__links {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav__links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .nav__links a:hover { color: var(--text); border-color: var(--line); }
+
+  /* ---------------------------------------------------------------
+     Hero: duas colunas no desktop, empilhado no mobile.
+     Mobile-first -> coluna única por padrão, grid a partir de 900px.
+  --------------------------------------------------------------- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 8vw, 6rem);
+  }
+
+  @media (min-width: 900px) {
+    .hero {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 3rem;
+    }
+  }
+
+  /* Coluna de texto: alinhada à esquerda, com respiro */
+  .hero__copy { max-width: 36rem; }
+
+  /* Selo com ponto no acento */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 0.3rem 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+  .badge__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--font-title);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    /* tipografia fluida do título */
+    font-size: clamp(2.3rem, 6vw, 4.1rem);
+    margin: 0 0 1.5rem;
+  }
+  /* parte destacada: itálico + acento */
+  h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .hero__sub {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 34rem;
+    margin: 0 0 2.25rem;
+  }
+
+  /* Ações */
+  .actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--bg);
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.4rem;
+    text-decoration: none;
+    cursor: pointer;
+    /* anima só transform (hover) */
+    transition: transform 200ms var(--ease);
+  }
+  .btn:hover { transform: translateY(-2px); }
+
+  .link-sec {
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: color 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .link-sec:hover { color: var(--text); border-color: var(--accent); }
+
+  /* ---------------------------------------------------------------
+     Órbita de tecnologias (decorativa).
+     font-size em clamp() -> todos os tamanhos em em escalam juntos.
+     Centro perto da borda direita; overflow hidden corta os anéis;
+     mask-image suaviza a borda esquerda.
+  --------------------------------------------------------------- */
+  .orbit {
+    position: relative;
+    height: 40em;                 /* cresce com o font-size */
+    overflow: hidden;
+    font-size: clamp(9px, 2vw, 16px);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 38%);
+            mask-image: linear-gradient(to right, transparent 0%, #000 38%);
+  }
+
+  /* Âncora de 0x0: centro da órbita, empurrado para perto da direita */
+  .orbit__anchor {
+    position: absolute;
+    top: 50%;
+    left: 76%;
+    width: 0;
+    height: 0;
+  }
+
+  /* Anéis concêntricos, borda pontilhada, centrados na âncora via margin
+     (deixa o transform livre para a animação de rotação) */
+  .ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px dotted var(--line);
+    border-radius: 50%;
+    animation: spin var(--dur) linear infinite;
+  }
+
+  /* Wrapper de posição: fica no ponto do anel e só posiciona */
+  .node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Chip interno: gira ao contrário (reverse) para a sigla ficar de pé */
+  .chip {
+    width: 3.4em;
+    height: 3.4em;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 0.85em;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    animation: spin var(--dur) linear infinite reverse;
+  }
+  .chip--accent { color: var(--accent); border-color: var(--accent); }
+
+  /* Centro fixo: "PHP" em Fraunces, no acento */
+  .orbit__center {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 7em;
+    height: 7em;
+    margin: -3.5em 0 0 -3.5em;    /* centra na âncora */
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    font-family: var(--font-title);
+    font-style: italic;
+    font-size: 1.6em;
+    color: var(--accent);
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------------------------------------------------------------
+     Entrada em sequência: fade + translateY(16px).
+     Anima só transform e opacity.
+  --------------------------------------------------------------- */
+  .reveal {
+    opacity: 0;
+    animation: reveal 800ms var(--ease) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Respeita quem prefere menos movimento: desliga TUDO, inclusive a órbita */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Navbar -->
+    <header>
+      <nav class="nav" aria-label="Principal">
+        <a class="nav__logo" href="#">carlos0ff<span>.dev</span></a>
+        <ul class="nav__links">
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <main>
+      <section class="hero">
+        <div class="hero__copy">
+          <span class="badge reveal" style="--delay: 100ms">
+            <span class="badge__dot"></span> Disponível para projetos
+          </span>
+
+          <h1 class="reveal" style="--delay: 200ms">
+            Backend em Laravel que <em>continua de pé</em> depois do deploy.
+          </h1>
+
+          <p class="hero__sub reveal" style="--delay: 300ms">
+            Sou o José Carlos. Pego a ideia, desenho a API e o banco, e coloco no
+            ar com Docker. Código limpo o bastante para você entender sem precisar de mim.
+          </p>
+
+          <div class="actions reveal" style="--delay: 400ms">
+            <a class="btn" href="#contato">Conversar sobre o projeto</a>
+            <a class="link-sec" href="#projetos">Ver o que já construí</a>
+          </div>
+        </div>
+
+        <!-- Órbita: puramente decorativa -->
+        <div class="orbit reveal" style="--delay: 500ms" aria-hidden="true">
+          <div class="orbit__anchor" id="orbit">
+            <div class="orbit__center">PHP</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script>
+  /* -----------------------------------------------------------------
+     Gera anéis e ícones a partir de um array.
+     - 3 anéis: tamanhos 20/28/36 em, velocidades 36/54/72s.
+     - Cada anel com um ângulo inicial diferente (offset) para os
+       ícones não ficarem alinhados entre os anéis.
+     - 12 siglas, 4 por anel, distribuídas igualmente (90° entre elas).
+  ----------------------------------------------------------------- */
+  const RINGS = [
+    { size: 20, dur: 36, offset: 0,  techs: ["Lv", "JS", "Java", "SQL"] },
+    { size: 28, dur: 54, offset: 35, techs: ["Docker", "TW", "Git", "HTML"] },
+    { size: 36, dur: 72, offset: 62, techs: ["CSS", "API", "MVC", "REST"] },
+  ];
+
+  const anchor = document.getElementById("orbit");
+
+  RINGS.forEach(({ size, dur, offset, techs }) => {
+    // Anel centrado na âncora via margin negativa (= metade do tamanho)
+    const ring = document.createElement("div");
+    ring.className = "ring";
+    ring.style.width = size + "em";
+    ring.style.height = size + "em";
+    ring.style.margin = (-size / 2) + "em 0 0 " + (-size / 2) + "em";
+    ring.style.setProperty("--dur", dur + "s");
+
+    const step = 360 / techs.length;
+
+    techs.forEach((tech, i) => {
+      const angle = (offset + i * step) * Math.PI / 180;
+      // Ponto na borda do anel: raio = 50% da largura do anel
+      const left = 50 + 50 * Math.cos(angle);
+      const top  = 50 + 50 * Math.sin(angle);
+
+      const node = document.createElement("div");   // wrapper de posição
+      node.className = "node";
+      node.style.left = left + "%";
+      node.style.top = top + "%";
+
+      const chip = document.createElement("div");    // chip que gira ao contrário
+      chip.className = "chip" + (tech === "Lv" ? " chip--accent" : "");
+      chip.style.setProperty("--dur", dur + "s");
+      chip.textContent = tech;
+
+      node.appendChild(chip);
+      ring.appendChild(node);
+    });
+
+    anchor.appendChild(ring);
+  });
+</script>
+</body>
+</html>

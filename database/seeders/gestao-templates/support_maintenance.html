@@ -1,0 +1,37 @@
+<h1>Termo de Suporte e Manutenção</h1>
+<p>Termo complementar ao contrato nº {{ contrato.numero }} — projeto {{ projeto.nome }} — CONTRATANTE: {{ cliente.razao_social }}.</p>
+
+<h2>1. Canais e horário de atendimento</h2>
+<p>{{ contrato.clausula.support_channels }}</p>
+
+<h2>2. Abertura de chamados</h2>
+<p>2.1. Os chamados devem ser abertos pelo portal do cliente, informando o projeto, a descrição do problema, os passos para reproduzi-lo, prints quando possível e a prioridade.</p>
+<p>2.2. Prioridades: <strong>Urgente</strong> — sistema indisponível em produção; <strong>Alta</strong> — funcionalidade essencial com falha e sem alternativa; <strong>Normal</strong> — falha com alternativa ou funcionalidade não essencial; <strong>Baixa</strong> — dúvidas e ajustes cosméticos. A CONTRATADA poderá reclassificar a prioridade, justificando.</p>
+
+<h2>3. Prazos por prioridade</h2>
+<p>{{ contrato.sla }}</p>
+<p>3.1. <strong>Prazo de resposta</strong> é o tempo até o primeiro retorno técnico. <strong>Prazo de solução</strong> é uma estimativa e depende da natureza do problema e de dependências externas.</p>
+<p>3.2. Os prazos são contados em horas úteis, dentro do horário de atendimento, e ficam suspensos enquanto o chamado aguarda informações da CONTRATANTE.</p>
+<p>3.3. Não há garantia de disponibilidade contínua do sistema nem de tempo de recuperação além do expressamente previsto neste termo.</p>
+
+<h2>4. Suporte incluído</h2>
+<p>{{ contrato.clausula.support_included }}</p>
+
+<h2>5. Correção de defeitos e atualizações</h2>
+<p>5.1. Garantia: {{ contrato.clausula.warranty }}</p>
+<p>5.2. Manutenção: {{ contrato.clausula.maintenance_included }}</p>
+
+<h2>6. Limites, exclusões e serviços adicionais</h2>
+<p>{{ contrato.clausula.not_included }}</p>
+<p>Novas funcionalidades e alterações fora do escopo seguem o fluxo de solicitação adicional, com orçamento e aprovação prévios.</p>
+
+<h2>7. Atendimento emergencial</h2>
+<p>{{ contrato.clausula.emergency }}</p>
+
+<h2>Assinaturas</h2>
+<p>E, por estarem de acordo, as partes assinam este instrumento eletronicamente, reconhecendo a validade da assinatura eletrônica nos termos da Medida Provisória nº 2.200-2/2001 e da Lei nº 14.063/2020. A data, a identificação dos signatários e as evidências de autenticação constam do registro de assinatura emitido pelo provedor.</p>
+<table>
+    <tr><th>CONTRATADA</th><th>CONTRATANTE</th></tr>
+    <tr><td>{{ empresa.nome }}<br>{{ empresa.documento }}</td><td>{{ cliente.razao_social }}<br>{{ cliente.documento }}<br>Representante: {{ cliente.responsavel }}</td></tr>
+</table>
+<p>{{ empresa.cidade }}, {{ data.hoje }}.</p>

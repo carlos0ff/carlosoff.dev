@@ -1,0 +1,411 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-incognito: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --animate-float: float 3s ease-in-out infinite;
+
+    --color-primary-bg: #0d1117;
+    --color-secondary-bg: #f4f4f5;
+    --color-primary-color: #ff2d20;
+    --color-secondary-color: #2da44e;
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+.header-bg {
+    background: linear-gradient(180deg, rgba(7, 20, 34, 0) 0%, #071422 100%), linear-gradient(180deg, #0b1b2b 0%, rgba(11, 27, 43, 0.2) 100%),
+                url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 100%;
+}
+
+.post-card {
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    border-color: #3a536b !important;
+}
+
+.effect-left, .effect-right {
+    will-change: transform, opacity;
+}
+
+.effect-left {
+    animation: floating-left 7s ease-in-out infinite, glow-effect 4s ease-in-out infinite;
+}
+
+.effect-right {
+    animation: floating-right 8s ease-in-out infinite, glow-effect 5s ease-in-out infinite;
+    animation-delay: 1s, 0.5s;
+}
+
+.skeleton-block {
+    background: linear-gradient(90deg, #1c2f41 25%, #24405c 50%, #1c2f41 75%);
+    background-size: 400% 100%;
+    animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+.skeleton-card:nth-child(2n) .skeleton-block { animation-delay: 0.15s; }
+.skeleton-card:nth-child(3n) .skeleton-block { animation-delay: 0.3s; }
+
+#loading-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+#loading-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #ff0000; 
+    box-shadow: 0 0 10px #ff0000, 0 0 5px #ff0000;
+    transition: width 0.4s ease, opacity 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton-block {
+        animation: none;
+        background: #1c2f41;
+    }
+}
+
+/* Movimento suave esquerdo */
+@keyframes floating-left {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(12px, 6px, 0);
+    }
+}
+
+/* Movimento suave direito */
+@keyframes floating-right {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(-12px, 6px, 0);
+    }
+}
+
+/* Pulso de luminosidade */
+@keyframes glow-effect {
+    0%,
+    100% {
+        opacity: 0.35;
+    }
+
+    50% {
+        opacity: 0.65;
+    }
+}
+
+/* Contribution Graph */
+#calendar-wrapper {
+    width: 100%;
+    min-width: 0;
+}
+
+.react-activity-calendar__calendar {
+    display: block;
+}
+
+.react-activity-calendar__legend-month text {
+    font-size: 10px;
+    fill: #8b949e;
+}
+
+.react-activity-calendar__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 36px;
+    font-size: 12px;
+    color: #8b949e;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.react-activity-calendar__legend-colors {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* Experiência: entrada suave dos cards com pequeno stagger */
+@keyframes experience-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.experience-reveal {
+    opacity: 0;
+    animation: experience-reveal 0.6s ease-out forwards;
+    animation-delay: calc(var(--reveal-index, 0) * 90ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .experience-reveal {
+        opacity: 1;
+        animation: none;
+    }
+}
+
+/* ── Painel administrativo: tokens de cor ──────────────────────────────────
+   Todas as cores do /admin vivem aqui. Os valores só existem sob `.admin-theme`
+   (aplicado no <html> dos layouts do painel), então o site público não muda.
+   Nos Blade, use as classes semânticas (bg-card, text-foreground-secondary,
+   border-border, bg-primary...) e nunca valores hexadecimais. */
+.admin-theme {
+    color-scheme: light;
+
+    /* Superfícies (tema claro — padrão FutureData) */
+    --background: #f4f6fa;
+    --background-secondary: #ffffff;
+    --header: #ffffff;
+    --card: #ffffff;
+    --card-hover: #f8fafc;
+    --overlay: rgb(15 23 42 / 0.45);
+
+    /* Bordas */
+    --border: #e4e9f0;
+    --border-subtle: #eef2f7;
+    --border-hover: #cbd5e1;
+
+    /* Texto */
+    --foreground: #0f172a;
+    --foreground-secondary: #475569;
+    --foreground-muted: #94a3b8;
+    --foreground-disabled: #cbd5e1;
+
+    /* Accent: cor de ação/destaque, nunca de área grande */
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-active: #1e40af;
+    --primary-muted: rgb(37 99 235 / 0.1);
+    --primary-border: rgb(37 99 235 / 0.3);
+    --primary-foreground: #ffffff;
+
+    /* Botão secundário */
+    --secondary: #f1f5f9;
+    --secondary-hover: #e2e8f0;
+    --secondary-foreground: #334155;
+
+    /* Estados semânticos */
+    --success: #16a34a;
+    --success-muted: rgb(22 163 74 / 0.1);
+    --success-border: rgb(22 163 74 / 0.25);
+    --warning: #d97706;
+    --warning-muted: rgb(217 119 6 / 0.1);
+    --warning-border: rgb(217 119 6 / 0.25);
+    --error: #dc2626;
+    --error-muted: rgb(220 38 38 / 0.1);
+    --error-border: rgb(220 38 38 / 0.25);
+    --info: #2563eb;
+    --info-muted: rgb(37 99 235 / 0.1);
+    --info-border: rgb(37 99 235 / 0.25);
+
+    /* Versões opacas (toasts sobrepõem conteúdo, então não podem ser translúcidas) */
+    --success-surface: color-mix(in srgb, var(--success) 10%, var(--card));
+    --error-surface: color-mix(in srgb, var(--error) 10%, var(--card));
+
+    /* Sombra suave de cartão (profundidade do estilo claro) */
+    --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-background-secondary: var(--background-secondary);
+    --color-header: var(--header);
+    --color-card: var(--card);
+    --color-card-hover: var(--card-hover);
+    --color-overlay: var(--overlay);
+    --color-border: var(--border);
+    --color-border-subtle: var(--border-subtle);
+    --color-border-hover: var(--border-hover);
+    --color-foreground: var(--foreground);
+    --color-foreground-secondary: var(--foreground-secondary);
+    --color-foreground-muted: var(--foreground-muted);
+    --color-foreground-disabled: var(--foreground-disabled);
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-primary-active: var(--primary-active);
+    --color-primary-muted: var(--primary-muted);
+    --color-primary-border: var(--primary-border);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-hover: var(--secondary-hover);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-success: var(--success);
+    --color-success-muted: var(--success-muted);
+    --color-success-border: var(--success-border);
+    --color-success-surface: var(--success-surface);
+    --color-warning: var(--warning);
+    --color-warning-muted: var(--warning-muted);
+    --color-warning-border: var(--warning-border);
+    --color-error: var(--error);
+    --color-error-muted: var(--error-muted);
+    --color-error-border: var(--error-border);
+    --color-error-surface: var(--error-surface);
+    --color-info: var(--info);
+    --color-info-muted: var(--info-muted);
+    --color-info-border: var(--info-border);
+}
+
+/* Foco visível e consistente em todo o painel (teclado). */
+.admin-theme :focus-visible {
+    outline: 2px solid var(--primary-hover);
+    outline-offset: 2px;
+}
+
+.admin-theme input:focus-visible,
+.admin-theme textarea:focus-visible,
+.admin-theme select:focus-visible {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-muted);
+}
+
+.admin-theme ::selection {
+    background: var(--primary-border);
+    color: var(--foreground);
+}
+
+.admin-theme ::placeholder {
+    color: var(--foreground-muted);
+}
+
+/* Profundidade suave nas superfícies claras (estilo FutureData). */
+.admin-theme .bg-card {
+    box-shadow: var(--shadow-card);
+}
+
+/* ── Painel administrativo ─────────────────────────────────────────────── */
+
+/* Tabelas: no mobile cada linha vira um cartão (rótulo vem do atributo data-label da <td>). */
+.admin-table thead th {
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--foreground-secondary);
+    white-space: nowrap;
+}
+
+.admin-table tbody tr {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.admin-table tbody tr {
+    transition: background-color 0.15s;
+}
+
+.admin-table tbody tr:hover {
+    background-color: var(--card-hover);
+}
+
+.admin-table tbody td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+}
+
+@media (max-width: 767px) {
+    .admin-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+
+    .admin-table,
+    .admin-table tbody,
+    .admin-table tr,
+    .admin-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table tbody tr {
+        padding: 0.75rem 1rem;
+    }
+
+    .admin-table tbody td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.3rem 0;
+        text-align: right;
+    }
+
+    .admin-table tbody td::before {
+        content: attr(data-label);
+        flex-shrink: 0;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--foreground-muted);
+        text-align: left;
+    }
+
+    .admin-table tbody td[data-label='']::before {
+        display: none;
+    }
+}
+
+/* Colunas secundárias: escondidas entre tablet e desktop estreito (a linha não cabe), visíveis no mobile empilhado e em telas largas. */
+@media (min-width: 768px) and (max-width: 1399px) {
+    .admin-table .admin-col-wide {
+        display: none;
+    }
+}
+
+/* Botão em carregamento (aplicado por admin.js ao enviar um formulário). */
+button[data-loading] [data-button-spinner] {
+    display: inline-block;
+}
+
+
+/* Oculta a barra de scroll (ex.: nav da sidebar do admin) mantendo a rolagem acessível. */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { width: 0; height: 0; display: none; }

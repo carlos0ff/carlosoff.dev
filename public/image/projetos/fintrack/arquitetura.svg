@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" role="img" aria-label="Diagrama de arquitetura do FinTrack: navegador com Vue e Inertia, monólito Laravel, API dedicada ao n8n, Evolution API e WhatsApp, e bancos de dados.">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4d8dff"/>
+    </marker>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="660" rx="16" fill="#0b0f14"/>
+
+  <!-- Título -->
+  <text x="40" y="44" fill="#e6e8ee" font-size="24" font-weight="700">Arquitetura — FinTrack</text>
+  <text x="40" y="70" fill="#8b93a3" font-size="15">Monólito Laravel + Inertia/Vue · automação de lançamentos via n8n &amp; WhatsApp</text>
+
+  <!-- ===== Navegador ===== -->
+  <g>
+    <rect x="40" y="110" width="240" height="150" rx="10" fill="#111820" stroke="#2a3340"/>
+    <text x="60" y="140" fill="#e6e8ee" font-size="16" font-weight="600">Navegador (SPA)</text>
+    <text x="60" y="170" fill="#9aa3b2" font-size="14">Vue 3 + TypeScript</text>
+    <text x="60" y="194" fill="#9aa3b2" font-size="14">Inertia.js · Tailwind CSS</text>
+    <text x="60" y="218" fill="#9aa3b2" font-size="14">Ícones Lucide</text>
+    <text x="60" y="242" fill="#6f7788" font-size="13">Ziggy / Wayfinder (rotas)</text>
+  </g>
+
+  <!-- ===== Laravel (centro) ===== -->
+  <g>
+    <rect x="370" y="110" width="320" height="300" rx="12" fill="#101a2b" stroke="#4d8dff" stroke-width="1.5"/>
+    <text x="390" y="140" fill="#e6e8ee" font-size="17" font-weight="700">Laravel 13 — Monólito</text>
+    <text x="390" y="162" fill="#6f7788" font-size="12">PHP 8.4 · Inertia 2 · Vite</text>
+
+    <rect x="390" y="178" width="280" height="54" rx="8" fill="#0d1420" stroke="#2a3340"/>
+    <text x="406" y="200" fill="#cfd5df" font-size="14" font-weight="600">routes/web (Inertia)</text>
+    <text x="406" y="221" fill="#8b93a3" font-size="12.5">public · auth · app · admin</text>
+
+    <rect x="390" y="244" width="280" height="54" rx="8" fill="#0d1420" stroke="#2a3340"/>
+    <text x="406" y="266" fill="#cfd5df" font-size="14" font-weight="600">Controllers/App (módulos)</text>
+    <text x="406" y="287" fill="#8b93a3" font-size="12.5">contas · lançamentos · cartões · relatórios…</text>
+
+    <rect x="390" y="310" width="280" height="80" rx="8" fill="#0d1420" stroke="#f59e0b" stroke-width="1.3"/>
+    <text x="406" y="332" fill="#f6c667" font-size="14" font-weight="600">routes/api.php</text>
+    <text x="406" y="353" fill="#cfd5df" font-size="13">POST /api/n8n/webhook</text>
+    <text x="406" y="374" fill="#8b93a3" font-size="12">EnsureN8nSecret (X-N8N-Secret) · 30 req/min</text>
+  </g>
+
+  <!-- ===== Automação (direita) ===== -->
+  <g>
+    <rect x="780" y="110" width="180" height="70" rx="10" fill="#111820" stroke="#2a3340"/>
+    <text x="800" y="140" fill="#e6e8ee" font-size="15" font-weight="600">n8n</text>
+    <text x="800" y="162" fill="#9aa3b2" font-size="12.5">workflow WhatsApp</text>
+
+    <rect x="780" y="210" width="180" height="64" rx="10" fill="#111820" stroke="#2a3340"/>
+    <text x="800" y="238" fill="#e6e8ee" font-size="15" font-weight="600">Evolution API</text>
+    <text x="800" y="259" fill="#9aa3b2" font-size="12.5">envio de mensagens</text>
+
+    <rect x="780" y="304" width="180" height="60" rx="10" fill="#111820" stroke="#2a3340"/>
+    <text x="800" y="331" fill="#e6e8ee" font-size="15" font-weight="600">WhatsApp</text>
+    <text x="800" y="351" fill="#9aa3b2" font-size="12.5">"gastei R$ 35 no almoço"</text>
+  </g>
+
+  <!-- ===== Dados (base) ===== -->
+  <g>
+    <text x="40" y="470" fill="#6f7788" font-size="13" font-weight="600" letter-spacing="1">PERSISTÊNCIA</text>
+    <rect x="40" y="484" width="210" height="88" rx="10" fill="#111820" stroke="#2a3340"/>
+    <text x="60" y="512" fill="#e6e8ee" font-size="15" font-weight="600">MySQL 8.4</text>
+    <text x="60" y="534" fill="#9aa3b2" font-size="12.5">app (Sail)</text>
+    <text x="60" y="555" fill="#6f7788" font-size="12">users · accounts · transactions</text>
+
+    <rect x="270" y="484" width="190" height="88" rx="10" fill="#111820" stroke="#2a3340"/>
+    <text x="290" y="512" fill="#e6e8ee" font-size="15" font-weight="600">SQLite</text>
+    <text x="290" y="534" fill="#9aa3b2" font-size="12.5">padrão (.env.example)</text>
+
+    <rect x="480" y="484" width="150" height="88" rx="10" fill="#111820" stroke="#2a3340"/>
+    <text x="500" y="512" fill="#e6e8ee" font-size="15" font-weight="600">Redis</text>
+    <text x="500" y="534" fill="#9aa3b2" font-size="12.5">cache · filas</text>
+
+    <rect x="650" y="484" width="310" height="88" rx="10" fill="#111820" stroke="#2a3340"/>
+    <text x="670" y="512" fill="#e6e8ee" font-size="15" font-weight="600">PostgreSQL 16</text>
+    <text x="670" y="534" fill="#9aa3b2" font-size="12.5">banco da Evolution API</text>
+    <text x="670" y="555" fill="#6f7788" font-size="12">(serviço de WhatsApp da automação)</text>
+  </g>
+
+  <!-- ===== Conexões ===== -->
+  <!-- Navegador <-> Laravel (Inertia) -->
+  <line x1="280" y1="185" x2="366" y2="185" stroke="#4d8dff" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="323" y="176" fill="#8b93a3" font-size="12" text-anchor="middle">Inertia</text>
+
+  <!-- WhatsApp -> Evolution -> n8n -->
+  <line x1="870" y1="304" x2="870" y2="276" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="870" y1="210" x2="870" y2="182" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- n8n -> routes/api.php -->
+  <path d="M780,150 L720,150 L720,340 L672,340" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="726" y="250" fill="#a9803a" font-size="12" text-anchor="start">POST webhook</text>
+
+  <!-- Laravel -> bancos -->
+  <path d="M470,410 L470,484" fill="none" stroke="#4d8dff" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M530,410 L345,484" fill="none" stroke="#4d8dff" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M560,410 L555,484" fill="none" stroke="#4d8dff" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Evolution -> PostgreSQL -->
+  <path d="M905,274 L905,440 L805,440 L805,484" fill="none" stroke="#f59e0b" stroke-width="1.6" marker-end="url(#arrow2)"/>
+</svg>

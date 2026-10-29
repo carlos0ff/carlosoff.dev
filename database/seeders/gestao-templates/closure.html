@@ -1,0 +1,35 @@
+<h1>Termo de Encerramento e Entrega</h1>
+<p>Referente ao contrato nº {{ contrato.numero }} — projeto {{ projeto.nome }} — celebrado entre {{ empresa.nome }} (CONTRATADA) e {{ cliente.razao_social }} (CONTRATANTE).</p>
+
+<h2>1. Conclusão dos serviços</h2>
+<p>As partes registram o encerramento dos serviços objeto do contrato, cujo objeto era: {{ contrato.objeto }}.</p>
+
+<h2>2. Entregáveis</h2>
+<p>{{ contrato.entregaveis }}</p>
+<p>2.1. A CONTRATANTE declara ter recebido os entregáveis acima, ressalvadas eventuais pendências listadas no anexo deste termo.</p>
+
+<h2>3. Documentação e acessos</h2>
+<p>3.1. A CONTRATADA entrega o código-fonte, a documentação técnica disponível e as credenciais de administração dos ambientes sob sua gestão, por meio seguro previamente combinado.</p>
+<p>3.2. Após a entrega, a CONTRATANTE é responsável por alterar as senhas transferidas. A CONTRATADA revogará os próprios acessos e as credenciais de integração.</p>
+
+<h2>4. Dados</h2>
+<p>4.1. A CONTRATADA disponibilizará cópia dos dados em formato estruturado pelo prazo de 30 (trinta) dias. Após esse prazo, eliminará com segurança os dados pessoais sob sua guarda, exceto os que precise manter por obrigação legal.</p>
+<p>4.2. {{ contrato.clausula.data_protection }}</p>
+
+<h2>5. Responsabilidades após o encerramento</h2>
+<p>{{ contrato.clausula.termination }}</p>
+<p>As obrigações de confidencialidade e de garantia ainda vigentes permanecem válidas pelos prazos previstos no contrato.</p>
+
+<h2>6. Situação financeira</h2>
+<p>A situação financeira na data deste termo consta do extrato anexo emitido pelo sistema. Eventuais valores em aberto continuam devidos nos termos do contrato.</p>
+
+<h2>7. Transição</h2>
+<p>{{ contrato.clausula.domain_hosting }}</p>
+
+<h2>Assinaturas</h2>
+<p>E, por estarem de acordo, as partes assinam este instrumento eletronicamente, reconhecendo a validade da assinatura eletrônica nos termos da Medida Provisória nº 2.200-2/2001 e da Lei nº 14.063/2020. A data, a identificação dos signatários e as evidências de autenticação constam do registro de assinatura emitido pelo provedor.</p>
+<table>
+    <tr><th>CONTRATADA</th><th>CONTRATANTE</th></tr>
+    <tr><td>{{ empresa.nome }}<br>{{ empresa.documento }}</td><td>{{ cliente.razao_social }}<br>{{ cliente.documento }}<br>Representante: {{ cliente.responsavel }}</td></tr>
+</table>
+<p>{{ empresa.cidade }}, {{ data.hoje }}.</p>

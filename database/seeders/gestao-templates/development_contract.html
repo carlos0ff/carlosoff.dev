@@ -1,0 +1,79 @@
+<h1>Contrato de Prestação de Serviços de Desenvolvimento de Software</h1>
+<p><strong>Contrato nº {{ contrato.numero }}</strong></p>
+
+<p><strong>CONTRATADA:</strong> {{ empresa.nome }}, inscrita no CPF/CNPJ sob o nº {{ empresa.documento }}, e-mail {{ empresa.email }}.</p>
+<p><strong>CONTRATANTE:</strong> {{ cliente.razao_social }}, inscrita no CPF/CNPJ sob o nº {{ cliente.documento }}, com endereço em {{ cliente.endereco }}, neste ato representada por {{ cliente.responsavel }}, CPF {{ cliente.responsavel_documento }}.</p>
+<p>As partes acima identificadas celebram o presente contrato, que se regerá pelas cláusulas a seguir.</p>
+
+<h2>Cláusula 1ª — Do objeto</h2>
+<p>1.1. O objeto deste contrato é {{ contrato.objeto }}, referente ao projeto <strong>{{ projeto.nome }}</strong>.</p>
+<p>1.2. Objetivo do projeto: {{ projeto.objetivo }}</p>
+
+<h2>Cláusula 2ª — Do escopo e dos entregáveis</h2>
+<p>2.1. Escopo contratado: {{ contrato.escopo }}</p>
+<p>2.2. Entregáveis: {{ contrato.entregaveis }}</p>
+<p>2.3. Cronograma: {{ contrato.clausula.schedule }}</p>
+<p>2.4. Qualquer item não descrito nesta cláusula é considerado fora do escopo e segue a Cláusula 8ª.</p>
+
+<h2>Cláusula 3ª — Dos valores e da forma de pagamento</h2>
+<table>
+    <tr><th>Implantação / desenvolvimento</th><td>{{ contrato.valor_implantacao }}</td></tr>
+    <tr><th>Mensalidade</th><td>{{ contrato.mensalidade }}</td></tr>
+    <tr><th>Forma de pagamento</th><td>{{ contrato.forma_pagamento }}</td></tr>
+    <tr><th>Vencimento das mensalidades</th><td>Dia {{ contrato.dia_vencimento }} de cada mês</td></tr>
+</table>
+<p>3.1. Condições de pagamento: {{ contrato.condicoes_pagamento }}</p>
+<p>3.2. Reajuste: {{ contrato.clausula.price_adjustment }}</p>
+<p>3.3. Atraso: {{ contrato.clausula.late_payment }}</p>
+<p>3.4. Impostos: {{ contrato.clausula.taxes }}</p>
+<p>3.5. O pagamento somente será considerado efetuado após a sua confirmação pela instituição financeira ou pelo provedor de pagamento.</p>
+
+<h2>Cláusula 4ª — Das obrigações da CONTRATADA</h2>
+<p>{{ contrato.clausula.contractor_obligations }}</p>
+
+<h2>Cláusula 5ª — Das obrigações da CONTRATANTE</h2>
+<p>{{ contrato.clausula.client_obligations }}</p>
+
+<h2>Cláusula 6ª — Da garantia, do suporte e da manutenção</h2>
+<p>6.1. Garantia e correções: {{ contrato.clausula.warranty }}</p>
+<p>6.2. Suporte incluído: {{ contrato.clausula.support_included }}</p>
+<p>6.3. Manutenção incluída: {{ contrato.clausula.maintenance_included }}</p>
+<p>6.4. Os prazos de atendimento estão definidos no Termo de Suporte e Manutenção, que distingue prazo de resposta e prazo de solução.</p>
+
+<h2>Cláusula 7ª — Da validação e do aceite</h2>
+<p>{{ contrato.clausula.acceptance_criteria }}</p>
+
+<h2>Cláusula 8ª — Das alterações de escopo</h2>
+<p>{{ contrato.clausula.scope_changes }}</p>
+
+<h2>Cláusula 9ª — Da inadimplência, suspensão e reativação</h2>
+<p>9.1. {{ contrato.clausula.suspension_rules }}</p>
+<p>9.2. Política acordada para este contrato: tolerância de {{ politica.tolerancia_dias }} dia(s) após o vencimento; aviso prévio de {{ politica.aviso_previo_dias }} dia(s) antes de qualquer restrição; restrição prevista: {{ politica.forma_restricao }}; reativação: {{ politica.reativacao }}.</p>
+
+<h2>Cláusula 10ª — Do domínio e da hospedagem</h2>
+<p>{{ contrato.clausula.domain_hosting }}</p>
+
+<h2>Cláusula 11ª — Da propriedade intelectual</h2>
+<p>{{ contrato.clausula.intellectual_property }}</p>
+
+<h2>Cláusula 12ª — Da proteção de dados e da confidencialidade</h2>
+<p>{{ contrato.clausula.data_protection }}</p>
+
+<h2>Cláusula 13ª — Da vigência, renovação e rescisão</h2>
+<p>13.1. Vigência: de {{ contrato.inicio }} a {{ contrato.fim }}.</p>
+<p>13.2. Renovação: {{ contrato.renovacao }}</p>
+<p>13.3. Rescisão: {{ contrato.clausula.termination }}</p>
+
+<h2>Cláusula 14ª — Das disposições gerais</h2>
+<p>14.1. Comunicações formais serão feitas por escrito, preferencialmente pelo portal do cliente ou por e-mail, aos endereços informados neste contrato.</p>
+<p>14.2. A tolerância de uma parte quanto ao descumprimento de qualquer obrigação não implica renúncia ou novação.</p>
+<p>14.3. Este contrato e seus termos complementares (valores, suporte, domínio e hospedagem, solicitações adicionais e aceite) formam um único instrumento.</p>
+<p>14.4. {{ contrato.clausula.forum }}</p>
+
+<h2>Assinaturas</h2>
+<p>E, por estarem de acordo, as partes assinam este instrumento eletronicamente, reconhecendo a validade da assinatura eletrônica nos termos da Medida Provisória nº 2.200-2/2001 e da Lei nº 14.063/2020. A data, a identificação dos signatários e as evidências de autenticação constam do registro de assinatura emitido pelo provedor.</p>
+<table>
+    <tr><th>CONTRATADA</th><th>CONTRATANTE</th></tr>
+    <tr><td>{{ empresa.nome }}<br>{{ empresa.documento }}</td><td>{{ cliente.razao_social }}<br>{{ cliente.documento }}<br>Representante: {{ cliente.responsavel }}</td></tr>
+</table>
+<p>{{ empresa.cidade }}, {{ data.hoje }}.</p>

@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    
+}
+
+body{
+    background-image: url('../image/texture.png') !important;
+    background-size: 200px 200px;
+    background-position: 0 0;
+}
+
+.laravel-svg .path {
+    stroke: url(#paint-linear);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 12 8;
+    animation: draw-lines 6s linear infinite, glow-lines 2s ease-in-out infinite alternate;
+}
+
+.laravel-svg .path {
+    stroke: url(#paint-linear);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1800;
+    stroke-dashoffset: 1800;
+    animation: svg-draw 5s ease-in-out infinite, svg-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes svg-draw {
+    0% {
+        stroke-dashoffset: 1800;
+    }
+
+    55% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes svg-glow {
+    0% {
+        filter: drop-shadow(0 0 0px #FF2D20);
+        stroke-opacity: .35;
+    }
+
+    100% {
+        filter: drop-shadow(0 0 7px #FF2D20);
+        stroke-opacity: .9;
+    }
+}

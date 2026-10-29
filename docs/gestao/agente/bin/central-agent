@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require __DIR__.'/../src/State.php';
+require __DIR__.'/../src/CentralAgent.php';
+
+use CentralAgent\CentralAgent;
+use CentralAgent\State;
+
+$command = $argv[1] ?? 'help';
+
+try {
+    $agent = in_array($command, ['state', 'help'], true) ? null : CentralAgent::fromEnv();
+
+    switch ($command) {
+        case 'heartbeat':
+            $agent->heartbeat();
+            echo "heartbeat enviado\n";
+            break;
+
+        case 'sync':
+            foreach ($agent->sync() as $result) {
+                echo "{$result['type']} {$result['id']}: {$result['result']} — {$result['message']}\n";
+            }
+            echo "sync concluído\n";
+            break;
+
+        case 'run': // para o cron: a cada minuto
+            $agent->sync();
+            $agent->heartbeat();
+            echo "ok\n";
+            break;
+
+        case 'status':
+            echo json_encode($agent->status(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), "\n";
+            break;
+
+        case 'state':
+            $state = State::load(getenv('AGENT_STATE_DIR') ?: sys_get_temp_dir().'/central-agent');
+            echo json_encode(['mode' => $state->mode, 'effective' => $state->effectiveMode(), 'message' => $state->message, 'ends_at' => $state->endsAt, 'command_id' => $state->commandId], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), "\n";
+            break;
+
+        default:
+            echo "uso: central-agent [heartbeat|sync|run|status|state]\n";
+    }
+} catch (Throwable $exception) {
+    // Falha de comunicação nunca altera o estado local.
+    fwrite(STDERR, 'erro: '.$exception->getMessage()."\n");
+    exit(1);
+}
